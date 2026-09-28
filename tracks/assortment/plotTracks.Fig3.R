@@ -93,9 +93,9 @@ group_type <- c(    cnr_d5_runx3  = "polygon",
                 )
 
 # Define whether to fill zero-coverage gaps per autoscale group
-group_densify <- c( cnr_d5_runx3  = TRUE,
-                    cnr_d5_runx1  = TRUE,
-                    atc_d8        = TRUE
+group_densify <- c( cnr_d5_runx3  = FALSE,
+                    cnr_d5_runx1  = FALSE,
+                    atc_d8        = FALSE
                     )
 
 
@@ -120,7 +120,7 @@ displayPars(gene_track)$fontcolor.group <- "black"              # Gene label tex
 displayPars(gene_track)$fontface.group <- 4                     # Gene label text style (4 = bold italic)
 displayPars(gene_track)$col <- "black"                          # Gene model line/exon color
 displayPars(gene_track)$col.line <- "black"                     # Gene model connecting line color
-displayPars(axis_track)$labelPos <- "alternating"               # Makes the DNA position labels alternate in axis_track
+displayPars(axis_track)$labelPos <- "revAlternating"               # Makes the DNA position labels alternate in axis_track
 displayPars(axis_track)$col <- "black"                          # Axis line/tick color
 displayPars(axis_track)$fontcolor <- "black"                    # Axis position label color
 
@@ -291,7 +291,7 @@ plot_genes <- function(
     )
 
 
-    pdf(paste0(gene,".manual.pdf"), width = 5, height = 7)
+    pdf(paste0(gene,".manual.pdf"), width = 4.5, height = 6)
     # Plot the tracks
     plotTracks( c(result.all$tracks, peak_track1, peak_track2, peak_track_atac),
                 from = result.all$start_pos,
@@ -304,6 +304,6 @@ plot_genes <- function(
 }
 
 
-# plot_genes(gene = "Cxcr6", chromosome = "chr9", start_pos = 123790000, end_pos = 123854000)
-
-plot_genes(gene = "Tcf7", chromosome = "chr11", start_pos = 52 210 000, end_pos = 52 340 000)
+plot_genes(gene = "Cxcr6", chromosome = "chr9", start_pos = 123790000, end_pos = 123854000)
+plot_genes(gene = "Tcf7", chromosome = "chr11", start_pos = 52210000, end_pos = 52340000)
+plot_genes(gene = "Rora", chromosome = "chr9", start_pos = 68600000, end_pos = 69400000)

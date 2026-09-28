@@ -21,8 +21,6 @@
 # edges of every wide interval at 1bp (below), not just synthetic gap edges,
 # keeps those plateaus flat too.
 densifyZeros <- function(subset_data, region) {
-    mcols(subset_data)$score[mcols(subset_data)$score < 0] <- 0
-
     holes <- GenomicRanges::setdiff(region, subset_data)
     if (length(holes) > 0) {
         edges <- c(resize(holes, width = 1, fix = "start"),
@@ -64,8 +62,10 @@ subsetNormalizeBigwig <- function(  bigwig_data,
 
     # Loop over samples to calculate normalization of y ranges
     for(i in samples){
-        # Subset to the region of interest, filling zero-coverage gaps if requested
+        # Subset to the region of interest, flooring negative scores at 0
+        # (log-ratio bigwigs dip below 0) and filling zero-coverage gaps if requested
         subset_data <- subsetByOverlaps(bigwig_data[[i]], region)
+        mcols(subset_data)$score[mcols(subset_data)$score < 0] <- 0
         if (densify) {
             subset_data <- densifyZeros(subset_data, region)
         }
@@ -101,8 +101,10 @@ subsetNormalizeBigwig <- function(  bigwig_data,
 
     # Loop over BigWig files
     for (i in samples) {
-        # Subset to the region of interest, filling zero-coverage gaps if requested
+        # Subset to the region of interest, flooring negative scores at 0
+        # (log-ratio bigwigs dip below 0) and filling zero-coverage gaps if requested
         subset_data <- subsetByOverlaps(bigwig_data[[i]], region)
+        mcols(subset_data)$score[mcols(subset_data)$score < 0] <- 0
         if (densify) {
             subset_data <- densifyZeros(subset_data, region)
         }
