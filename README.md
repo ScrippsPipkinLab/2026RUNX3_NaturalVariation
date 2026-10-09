@@ -1,4 +1,4 @@
-# AlbaoRunx3Manuscript
+# RUNX3 Natural Variation Analysis
 
 Code and analysis assets for the manuscript *Variation in RUNX protein transcriptional activity determines T cell exhaustion and the pattern of memory CD8 T cell formation* (Albao *et al.*). The repository collects the single-cell RNA-seq, ATAC-seq, CUT&RUN, genome track and flow cytometry analyses used throughout the study, together with figure exports and helper scripts.
 
